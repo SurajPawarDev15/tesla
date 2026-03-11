@@ -7,9 +7,15 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --spacing: 0.25rem;
+    --text-2xl: 1.5rem;
+    --text-2xl--line-height: calc(2 / 1.5);
     --text-3xl: 1.875rem;
     --text-3xl--line-height: calc(2.25 / 1.875);
+    --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -163,19 +169,58 @@
   }
 }
 @layer utilities {
-  .text-3xl {
-    font-size: var(--text-3xl);
-    line-height: var(--tw-leading, var(--text-3xl--line-height));
+  .h-6 {
+    height: calc(var(--spacing) * 6);
   }
-  .font-bold {
-    --tw-font-weight: var(--font-weight-bold);
-    font-weight: var(--font-weight-bold);
+}
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  font-family: sans-serif;
+}
+.navbar {
+  position: fixed;
+  top: calc(var(--spacing) * 0);
+  z-index: 10;
+  display: flex;
+  height: 5.4rem;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3.2rem;
+}
+.nav_link {
+  margin-inline: 0.8rem;
+  border-radius: 0.8rem;
+  background-color: transparent;
+  padding-inline: 0.8rem;
+  padding-block: 0.4rem;
+  font-size: var(--text-2xl);
+  line-height: var(--tw-leading, var(--text-2xl--line-height));
+  --tw-font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-weight-semibold);
+  color: #181b21;
+  transition-property: all;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+  transition-duration: var(--tw-duration, var(--default-transition-duration));
+  --tw-duration: 300ms;
+  transition-duration: 300ms;
+  &:hover {
+    @media (hover: hover) {
+      background-color: #181b21;
+    }
   }
-  .underline {
-    text-decoration-line: underline;
+  &:hover {
+    @media (hover: hover) {
+      background-color: color-mix(in oklab, #181b21 10%, transparent);
+    }
   }
 }
 @property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
+@property --tw-duration {
   syntax: "*";
   inherits: false;
 }
@@ -183,6 +228,7 @@
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-font-weight: initial;
+      --tw-duration: initial;
     }
   }
 }
